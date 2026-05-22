@@ -1,0 +1,21 @@
+name: unzip
+on: [workflow_dispatch, push]
+permissions:
+  contents: write
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          unzip -o Panel_canales_digitales_FINAL_DOCTORALIA_CORREGIDO_FINAL_V3_PRIVADO.zip -d tmp
+          cp -R tmp/Panel_canales_digitales_FINAL_DOCTORALIA .
+          cp -R tmp/Panel_canales_digitales_FINAL_DOCTORALIA/frontend/. .
+          touch .nojekyll
+          rm -rf tmp
+      - run: |
+          git config user.name bot
+          git config user.email bot@example.com
+          git add .
+          git commit -m unzip || true
+          git push || true
