@@ -1,0 +1,210 @@
+{
+  "info": {
+    "name": "Doctoralia CRM Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3001"
+    },
+    {
+      "key": "start",
+      "value": "2026-05-22T00:00:00+02:00"
+    },
+    {
+      "key": "end",
+      "value": "2026-05-29T23:59:59+02:00"
+    },
+    {
+      "key": "booking_id",
+      "value": "booking_id_de_prueba"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/doctoralia/health"
+      }
+    },
+    {
+      "name": "Bootstrap",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/doctoralia/bootstrap"
+      }
+    },
+    {
+      "name": "Slots",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/doctoralia/calendar/slots?start={{start}}&end={{end}}"
+      }
+    },
+    {
+      "name": "Bookings",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/doctoralia/calendar/bookings?start={{start}}&end={{end}}"
+      }
+    },
+    {
+      "name": "Patients",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/doctoralia/patients?start={{start}}&end={{end}}"
+      }
+    },
+    {
+      "name": "Book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/doctoralia/calendar/book",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"start\": \"2026-05-22T10:00:00+02:00\", \"duration\": 30, \"patient\": {\"first_name\": \"Paciente\", \"last_name\": \"Prueba\", \"phone\": \"+34600000000\", \"email\": \"paciente@example.com\"}, \"comment\": \"Reserva de prueba\"}"
+        }
+      }
+    },
+    {
+      "name": "Move",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/doctoralia/calendar/move",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"booking_id\": \"{{booking_id}}\", \"start\": \"2026-05-22T11:00:00+02:00\", \"duration\": 30}"
+        }
+      }
+    },
+    {
+      "name": "Confirm",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/doctoralia/calendar/confirm",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"booking_id\": \"{{booking_id}}\"}"
+        }
+      }
+    },
+    {
+      "name": "Cancel",
+      "request": {
+        "method": "DELETE",
+        "url": "{{base_url}}/api/doctoralia/calendar/cancel/{{booking_id}}"
+      }
+    },
+    {
+      "name": "Webhook",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{base_url}}/api/doctoralia/webhook",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"event\": \"slot-booked\", \"booking_id\": \"{{booking_id}}\"}"
+        }
+      }
+    },
+    {
+      "name": "CRM - List patient notes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/crm/patient-notes?booking_id=xxx",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "crm",
+            "patient-notes?booking_id=xxx"
+          ]
+        }
+      }
+    },
+    {
+      "name": "CRM - Create patient note",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/crm/patient-notes",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "crm",
+            "patient-notes"
+          ]
+        }
+      }
+    },
+    {
+      "name": "CRM - Update patient note",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/crm/patient-notes/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "crm",
+            "patient-notes",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "CRM - Delete patient note",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/crm/patient-notes/1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "crm",
+            "patient-notes",
+            "1"
+          ]
+        }
+      }
+    }
+  ]
+}

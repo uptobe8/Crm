@@ -1,0 +1,48 @@
+{
+  "proyecto": "Panel_canales_digitales_FINAL_DOCTORALIA",
+  "frontend_separado": true,
+  "backend_creado": true,
+  "env_example_creado": true,
+  "postman_creado": true,
+  "documentacion_creada": true,
+  "crm_localstorage_mantenido": true,
+  "crm_doctoralia_backend_helpers": true,
+  "endpoints_internos": [
+    "GET /api/doctoralia/health",
+    "GET /api/doctoralia/bootstrap",
+    "GET /api/doctoralia/calendar/slots?start=&end=",
+    "GET /api/doctoralia/calendar/bookings?start=&end=",
+    "GET /api/doctoralia/patients?start=&end=",
+    "POST /api/doctoralia/calendar/book",
+    "POST /api/doctoralia/calendar/move",
+    "POST /api/doctoralia/calendar/confirm",
+    "DELETE /api/doctoralia/calendar/cancel/:bookingId",
+    "POST /api/doctoralia/webhook"
+  ],
+  "bootstrap_mapea_facilities_doctors_addresses_services": true,
+  "env_sandbox_example_creado": true,
+  "env_production_example_creado": true,
+  "node_syntax_check": "server.js validado con node --check",
+  "conexion_real_doctoralia": "pendiente: requiere credenciales sandbox/produccion reales",
+  "bootstrap_no_exige_ids_mapeo_inicial": true,
+  "validaciones_separadas_oauth_full": true,
+  "webhook_procesa_y_actualiza_cache": true,
+  "webhook_actualiza_status_processed_failed": true,
+  "notas_internas_crud_api": [
+    "GET /api/crm/patient-notes?booking_id=xxx",
+    "POST /api/crm/patient-notes",
+    "PUT /api/crm/patient-notes/:id",
+    "DELETE /api/crm/patient-notes/:id"
+  ],
+  "crm_upsert_doctoralia_no_solo_merge": true,
+  "crm_cancelaciones_estado_cancelada": true,
+  "cache_actualizada_desde": [
+    "bookings",
+    "patients",
+    "webhook",
+    "book",
+    "move",
+    "confirm",
+    "cancel"
+  ]
+}

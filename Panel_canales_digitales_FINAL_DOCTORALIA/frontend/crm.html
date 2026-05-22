@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>CRM · Leads y contacto</title>
+<style>
+:root{
+  --bg:#f4f6f8;--surface:#fff;--surface2:#f8fafc;--ink:#101828;--muted:#667085;--line:#e4e7ec;
+  --dark:#0f172a;--green:#12a150;--amber:#f59e0b;--red:#d92d20;--blue:#2563eb;--purple:#7c3aed;
+  --shadow:0 18px 52px rgba(15,23,42,.10);--r-xl:28px;--r-lg:22px;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:linear-gradient(180deg,#f8fafc 0%,#f4f6f8 50%,#eef2f7 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.42}
+a{color:inherit}button,input,select,textarea{font:inherit}button{-webkit-tap-highlight-color:transparent}
+.app{width:min(1480px,100%);margin:0 auto;padding:calc(18px + var(--safe-top)) 18px calc(42px + var(--safe-bottom))}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.logo{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:var(--dark);color:white;font-weight:900;box-shadow:var(--shadow)}
+.eyebrow{margin:0 0 4px;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}
+h1,h2,h3,p{margin-top:0}h1{font-size:clamp(20px,3.4vw,34px);line-height:1.05;letter-spacing:-.04em;margin-bottom:0}h2{font-size:clamp(25px,3vw,40px);line-height:1.05;letter-spacing:-.045em;margin-bottom:10px}h3{font-size:18px;letter-spacing:-.02em;margin-bottom:8px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.nav a,.btn{display:inline-flex;justify-content:center;align-items:center;min-height:42px;border-radius:14px;padding:10px 14px;text-decoration:none;border:1px solid var(--line);background:var(--surface);font-weight:900;color:var(--dark);cursor:pointer}.btn.primary,.nav a.primary{background:var(--dark);color:white;border-color:var(--dark)}
+.hero{border-radius:var(--r-xl);padding:clamp(22px,4vw,38px);background:radial-gradient(circle at top right,rgba(124,58,237,.28),transparent 34%),linear-gradient(135deg,#0f172a,#1f2937);color:white;box-shadow:var(--shadow);display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:center}.hero p{color:#d6dae2;margin-bottom:0}.hero .eyebrow{color:#cbd5e1}
+.hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.hero-stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px}.hero-stat span{display:block;color:#dbe2ee;font-size:12px}.hero-stat strong{display:block;font-size:clamp(22px,3vw,34px);letter-spacing:-.05em}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:22px 0 15px}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;box-shadow:0 10px 28px rgba(15,23,42,.055)}.span-12{grid-column:span 12}.span-8{grid-column:span 8}.span-6{grid-column:span 6}.span-4{grid-column:span 4}
+.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.field{display:grid;gap:6px}.field label{font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:12px;color:var(--ink);outline:none}.field textarea{min-height:88px;resize:vertical}.field.full{grid-column:span 4}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn.ok{background:#ecfdf3;color:#05603a;border-color:#abefc6}.btn.warn{background:#fffaeb;color:#93370d;border-color:#fedf89}.btn.danger{background:#fef3f2;color:#912018;border-color:#fecdca}.btn.whatsapp{background:#dcfce7;color:#166534;border-color:#86efac}.btn.call{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}.btn.mail{background:#fee2e2;color:#b91c1c;border-color:#fecaca}
+.table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px rgba(15,23,42,.055)}.crm-table{width:100%;border-collapse:collapse;min-width:1180px}.crm-table th,.crm-table td{padding:12px 10px;border-bottom:1px solid var(--line);font-size:13px;text-align:left;vertical-align:top}.crm-table th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#f8fafc}.crm-table tr:hover td{background:#fafafa}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:900;border:1px solid var(--line);background:var(--surface2);color:var(--muted)}.badge.new{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}.badge.contacted{background:#ecfdf3;color:#05603a;border-color:#abefc6}.badge.whatsapp{background:#dcfce7;color:#166534;border-color:#86efac}.badge.call{background:#dbeafe;color:#1d4ed8;border-color:#93c5fd}.badge.mail{background:#fee2e2;color:#b91c1c;border-color:#fecaca}.badge.cancelled{background:#fef3f2;color:#912018;border-color:#fecdca}.badge.confirmed{background:#ecfdf3;color:#05603a;border-color:#abefc6}.badge.pending{background:#fffaeb;color:#93370d;border-color:#fedf89}
+.muted{color:var(--muted)}.mini{font-size:12px;color:var(--muted)}.lead-name{font-weight:900;text-decoration:underline}.notes{min-width:260px}.notes textarea{width:100%;min-height:62px;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;resize:vertical}.empty{padding:18px;border:1px dashed var(--line);border-radius:18px;color:var(--muted);background:var(--surface2)}
+.toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:var(--dark);color:white;padding:12px 16px;border-radius:999px;z-index:9999;box-shadow:0 12px 36px rgba(15,23,42,.22);font-size:13px;font-weight:900;max-width:calc(100% - 30px);text-align:center}
+@media(max-width:1100px){.hero{grid-template-columns:1fr}.span-8,.span-6,.span-4{grid-column:span 12}.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.field.full{grid-column:span 2}}
+@media(max-width:680px){.app{padding-left:14px;padding-right:14px}.topbar{display:block}.brand{margin-bottom:12px}.nav{justify-content:stretch}.nav a,.nav button{flex:1}.hero{border-radius:22px}.hero-stats,.form-grid{grid-template-columns:1fr}.field.full{grid-column:span 1}.section-head{display:block}.card{padding:16px;border-radius:20px}.actions .btn{width:100%;min-height:46px}.crm-table{min-width:980px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <div class="logo">CRM</div>
+    <div><p class="eyebrow">Recepción · sin Doctoralia</p><h1>CRM de leads</h1></div>
+  </a>
+  <nav class="nav">
+    <a href="index.html">General</a>
+    <a href="integraciones.html">APIs</a>
+    <button class="btn danger" type="button" onclick="CRMApp.resetCRM()">Reset CRM</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Gestión comercial</p>
+    <h2>Crear leads, asignar responsable y registrar contacto</h2>
+    <p>Zona nueva separada del panel de rentabilidad. Los leads se crean aquí, se asignan a un responsable y al contactar por WhatsApp, llamada o mail se duplican automáticamente en el panel de CRM contactado.</p>
+  </div>
+  <div class="hero-stats">
+    <article class="hero-stat"><span>Leads nuevos</span><strong id="statNew">0</strong></article>
+    <article class="hero-stat"><span>Contactados</span><strong id="statContacted">0</strong></article>
+    <article class="hero-stat"><span>Total CRM</span><strong id="statTotal">0</strong></article>
+    <article class="hero-stat"><span>Contactos hoy</span><strong id="statToday">0</strong></article>
+  </div>
+</section>
+
+<div class="section-head">
+  <div><p class="eyebrow">Alta de lead</p><h2>Crear contacto y asignar responsable</h2></div>
+</div>
+
+<section class="card">
+  <div class="form-grid">
+    <div class="field"><label>Nombre del lead</label><input id="leadName" placeholder="Nombre y apellidos"></div>
+    <div class="field"><label>Teléfono</label><input id="leadPhone" placeholder="+34 600 000 000"></div>
+    <div class="field"><label>Email</label><input id="leadEmail" placeholder="lead@empresa.com"></div>
+    <div class="field"><label>Empresa</label><input id="leadCompany" placeholder="Empresa"></div>
+    <div class="field"><label>Canal de entrada</label><select id="leadChannel"></select></div>
+    <div class="field"><label>Campaña / origen</label><input id="leadCampaign" placeholder="Campaña, UTM, anuncio..."></div>
+    <div class="field"><label>Responsable de llamar</label><select id="leadOwner"></select></div>
+    <div class="field"><label>Valor estimado</label><input id="leadValue" type="number" inputmode="numeric" placeholder="750"></div>
+    <div class="field full"><label>Datos del lead / detalle de entrada</label><textarea id="leadSourceDetail" placeholder="Mensaje, necesidad, servicio solicitado, URL, formulario, fuente, keyword, anuncio..."></textarea></div>
+  </div>
+  <div class="actions">
+    <button class="btn primary" type="button" onclick="CRMApp.createLeadFromForm()">Crear lead</button>
+    <button class="btn ok" type="button" onclick="CRMApp.demoLead()">Simular lead entrante</button>
+  </div>
+</section>
+
+<div class="section-head">
+  <div><p class="eyebrow">Panel CRM 1</p><h2>Leads pendientes de contactar</h2></div>
+</div>
+
+<section class="table-wrap">
+  <table class="crm-table">
+    <thead>
+      <tr>
+        <th>Lead</th><th>Teléfono</th><th>Email</th><th>Canal entrada</th><th>Día/hora entrada</th><th>Responsable</th><th>Valor</th><th>Datos del lead</th><th>Contacto</th><th>Estado</th><th>Acción</th>
+      </tr>
+    </thead>
+    <tbody id="leadsBody"></tbody>
+  </table>
+</section>
+
+<div class="section-head">
+  <div><p class="eyebrow">Panel CRM 2</p><h2>Leads contactados con fecha, método y notas</h2></div>
+</div>
+
+<section class="table-wrap">
+  <table class="crm-table">
+    <thead>
+      <tr>
+        <th>Lead</th><th>Teléfono</th><th>Email</th><th>Canal entrada</th><th>Día/hora entrada</th><th>Método</th><th>Día/hora contacto</th><th>Responsable</th><th>Valor</th><th>Datos del lead</th><th>Notas</th><th>Estado</th>
+      </tr>
+    </thead>
+    <tbody id="contactedBody"></tbody>
+  </table>
+</section>
+</div>
+
+<script>
+(function(){
+  var LEADS_KEY = "crm-v3-leads";
+  var CONTACTED_KEY = "crm-v3-contacted";
+  var CHANNELS = ["Google Ads","Meta Ads","SEO","WhatsApp","Email / Gmail","Web / Formularios","LinkedIn","TikTok","Referido","Otro"];
+  var RESPONSIBLES = ["Aitor","Comercial 1","Comercial 2","Administración","Ventas"];
+  var demoCount = 0;
+
+  function $(id){return document.getElementById(id);}
+  function nowStr(){return new Date().toLocaleString("es-ES",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});}
+  function iso(){return new Date().toISOString();}
+  function escapeHtml(s){return String(s == null ? "" : s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function load(key){try{return JSON.parse(localStorage.getItem(key)||"[]");}catch(e){return [];}}
+  function save(key,data){try{localStorage.setItem(key,JSON.stringify(data));}catch(e){}}
+  function leads(){return load(LEADS_KEY);}
+  function isDoctoraliaRow(row){return !!(row && (row.doctoraliaBookingId || row.channel === "Doctoralia" || row.company === "Doctoralia"));}
+  function contacted(){return load(CONTACTED_KEY);}
+  function setLeads(data){save(LEADS_KEY,data);}
+  function setContacted(data){save(CONTACTED_KEY,data);}
+
+  function id(){return "lead-" + Date.now() + "-" + Math.floor(Math.random()*9999);}
+  function toast(t){var old=document.querySelector(".toast");if(old)old.remove();var d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(function(){if(d&&d.parentNode)d.parentNode.removeChild(d);},2200);}
+
+  function initSelects(){
+    $("leadChannel").innerHTML = CHANNELS.map(function(c){return '<option value="'+escapeHtml(c)+'">'+escapeHtml(c)+'</option>';}).join("");
+    $("leadOwner").innerHTML = RESPONSIBLES.map(function(r){return '<option value="'+escapeHtml(r)+'">'+escapeHtml(r)+'</option>';}).join("");
+  }
+
+  function createLeadFromForm(){
+    var lead = {
+      id:id(),
+      name:$("leadName").value.trim() || "Lead sin nombre",
+      phone:$("leadPhone").value.trim(),
+      email:$("leadEmail").value.trim(),
+      company:$("leadCompany").value.trim(),
+      channel:$("leadChannel").value,
+      campaign:$("leadCampaign").value.trim(),
+      owner:$("leadOwner").value,
+      value:Number($("leadValue").value || 0),
+      entryAt:nowStr(),
+      entryISO:iso(),
+      sourceDetail:$("leadSourceDetail").value.trim(),
+      status:"Nuevo"
+    };
+    var data = leads();
+    data.unshift(lead);
+    setLeads(data);
+    clearForm();
+    render();
+    toast("Lead creado y asignado a " + lead.owner);
+  }
+
+  function clearForm(){
+    ["leadName","leadPhone","leadEmail","leadCompany","leadCampaign","leadValue","leadSourceDetail"].forEach(function(id){$(id).value="";});
+  }
+
+  function demoLead(){
+    demoCount += 1;
+    var channels = CHANNELS;
+    var names = ["María López","Carlos Martín","Lucía García","Javier Sánchez","Ana Pérez","Pedro Núñez"];
+    var ch = channels[demoCount % channels.length];
+    var lead = {
+      id:id(),
+      name:names[demoCount % names.length],
+      phone:"+34 600 10 2" + String(100 + demoCount).slice(-3),
+      email:"lead"+demoCount+"@empresa.com",
+      company:"Empresa demo " + demoCount,
+      channel:ch,
+      campaign:"Campaña " + ch,
+      owner:RESPONSIBLES[demoCount % RESPONSIBLES.length],
+      value:500 + demoCount * 120,
+      entryAt:nowStr(),
+      entryISO:iso(),
+      sourceDetail:"Lead de prueba creado desde botón de simulación CRM.",
+      status:"Nuevo"
+    };
+    var data = leads();
+    data.unshift(lead);
+    setLeads(data);
+    render();
+    toast("Lead demo creado");
+  }
+
+  function contactLead(leadId, method){
+    var data = leads();
+    var lead = data.find(function(x){return x.id === leadId;});
+    if(!lead){toast("Lead no encontrado");return;}
+    var copy = Object.assign({}, lead, {
+      crmContactId: "contact-" + Date.now() + "-" + Math.floor(Math.random()*9999),
+      contactMethod: method,
+      contactAt: nowStr(),
+      contactISO: iso(),
+      notes: "",
+      status: "Contactado"
+    });
+    var contactedData = contacted();
+    contactedData.unshift(copy);
+    setContacted(contactedData);
+    render();
+    toast("Lead duplicado en CRM contactado por " + labelMethod(method));
+  }
+
+  function labelMethod(method){
+    if(method === "whatsapp") return "WhatsApp";
+    if(method === "call") return "Llamada";
+    if(method === "mail") return "Mail";
+    return method;
+  }
+
+  var doctoraliaNoteTimers = {};
+  var doctoraliaNotesCache = {};
+
+  function noteElementId(contactId){
+    return "note-" + String(contactId || "").replace(/[^a-zA-Z0-9_-]/g, "-");
+  }
+
+  function latestNoteFromResponse(data){
+    var items = listItems(data);
+    return items.length ? items[0] : null;
+  }
+
+  function patientKeyFromRow(row){
+    var raw = row.rawDoctoralia || {};
+    var patient = raw.patient || (raw.booking && raw.booking.patient) || {};
+    return String(patient.id || patient.email || patient.phone || patient.phone_number || row.email || row.phone || "");
+  }
+
+  function notePayloadFromContact(row, value){
+    return {
+      booking_id: String(row.doctoraliaBookingId || ""),
+      patient_key: patientKeyFromRow(row),
+      note: String(value || ""),
+      contact_method: row.contactMethod || "otro",
+      contacted_at: row.contactISO || iso(),
+      owner: row.owner || ""
+    };
+  }
+
+  function applyDoctoraliaNoteToContact(contactId, noteRow){
+    if(!noteRow){return;}
+
+    var noteText = String(noteRow.note || "");
+    var data = contacted();
+    var changed = false;
+
+    data = data.map(function(row){
+      if(row.crmContactId === contactId){
+        row.notes = noteText;
+        row.doctoraliaNoteId = noteRow.id || row.doctoraliaNoteId || null;
+        changed = true;
+      }
+      return row;
+    });
+
+    if(changed){
+      setContacted(data);
+    }
+
+    var textarea = $(noteElementId(contactId));
+    if(textarea && textarea.value !== noteText){
+      textarea.value = noteText;
+    }
+  }
+
+  async function loadDoctoraliaNoteForContact(row){
+    if(!row || !row.doctoraliaBookingId || !row.crmContactId){return;}
+
+    var key = String(row.doctoraliaBookingId);
+
+    if(doctoraliaNotesCache[key]){
+      applyDoctoraliaNoteToContact(row.crmContactId, doctoraliaNotesCache[key]);
+      return;
+    }
+
+    try{
+      var data = await getPatientNotes(key);
+      var latest = latestNoteFromResponse(data);
+
+      if(latest){
+        doctoraliaNotesCache[key] = latest;
+        applyDoctoraliaNoteToContact(row.crmContactId, latest);
+      }
+    }catch(error){
+      console.error("Error cargando notas Doctoralia", error);
+    }
+  }
+
+  function saveNote(contactId, value){
+    var data = contacted();
+    var changedRow = null;
+
+    data = data.map(function(row){
+      if(row.crmContactId === contactId){
+        row.notes = value;
+        changedRow = row;
+      }
+      return row;
+    });
+
+    setContacted(data);
+
+    if(!changedRow || !changedRow.doctoraliaBookingId){
+      return;
+    }
+
+    clearTimeout(doctoraliaNoteTimers[contactId]);
+    doctoraliaNoteTimers[contactId] = setTimeout(async function(){
+      try{
+        var payload = notePayloadFromContact(changedRow, value);
+        var saved = null;
+
+        if(changedRow.doctoraliaNoteId){
+          saved = await updatePatientNote(changedRow.doctoraliaNoteId, payload);
+        }else if(payload.note.trim()){
+          saved = await createPatientNote(payload);
+        }
+
+        if(saved){
+          doctoraliaNotesCache[String(changedRow.doctoraliaBookingId)] = saved;
+          var nextData = contacted().map(function(row){
+            if(row.crmContactId === contactId){
+              row.notes = saved.note || payload.note;
+              row.doctoraliaNoteId = saved.id || row.doctoraliaNoteId || null;
+            }
+            return row;
+          });
+          setContacted(nextData);
+        }
+      }catch(error){
+        console.error("Error guardando nota Doctoralia", error);
+        toast("Error guardando nota interna Doctoralia");
+      }
+    }, 500);
+  }
+
+  function deleteLead(leadId){
+    setLeads(leads().filter(function(x){return x.id !== leadId;}));
+    render();
+    toast("Lead eliminado");
+  }
+
+  function resetCRM(){
+    setLeads([]);
+    setContacted([]);
+    render();
+    toast("CRM reiniciado");
+  }
+
+  function isCancelledStatus(status){
+    return /cancel|anulad|cancelad/i.test(String(status || ""));
+  }
+
+  function statusBadgeClass(status){
+    var value = String(status || "").toLowerCase();
+    if(/cancel|anulad|cancelad/.test(value)) return "cancelled";
+    if(/confirm|present|pagad|contact/.test(value)) return "confirmed";
+    if(/pend|risk|riesgo/.test(value)) return "pending";
+    return "new";
+  }
+
+  function contactButtons(row){
+    if(isCancelledStatus(row.status)){
+      return '<span class="badge cancelled">Reserva cancelada</span>';
+    }
+    return '<div class="actions" style="margin-top:0">' +
+      '<button class="btn whatsapp" type="button" onclick="CRMApp.contactLead(\''+row.id+'\',\'whatsapp\')">WhatsApp</button>' +
+      '<button class="btn call" type="button" onclick="CRMApp.contactLead(\''+row.id+'\',\'call\')">Llamar</button>' +
+      '<button class="btn mail" type="button" onclick="CRMApp.contactLead(\''+row.id+'\',\'mail\')">Mail</button>' +
+      '</div>';
+  }
+
+  function renderLeads(){
+    var data = leads().filter(function(row){return !isDoctoraliaRow(row);});
+    if(!data.length){
+      $("leadsBody").innerHTML = '<tr><td colspan="11"><div class="empty">No hay leads nuevos. Crea uno manualmente o usa “Simular lead entrante”.</div></td></tr>';
+      return;
+    }
+    $("leadsBody").innerHTML = data.map(function(row){
+      return '<tr>' +
+        '<td><span class="lead-name">'+escapeHtml(row.name)+'</span><div class="mini">'+escapeHtml(row.company)+'</div></td>' +
+        '<td>'+escapeHtml(row.phone || "-")+'</td>' +
+        '<td>'+escapeHtml(row.email || "-")+'</td>' +
+        '<td><span class="badge new">'+escapeHtml(row.channel)+'</span><div class="mini">'+escapeHtml(row.campaign || "")+'</div></td>' +
+        '<td>'+escapeHtml(row.entryAt)+'</td>' +
+        '<td>'+escapeHtml(row.owner)+'</td>' +
+        '<td>'+Number(row.value||0).toLocaleString("es-ES")+' €</td>' +
+        '<td>'+escapeHtml(row.sourceDetail || "-")+'</td>' +
+        '<td>'+contactButtons(row)+'</td>' +
+        '<td><span class="badge '+statusBadgeClass(row.status)+'">'+escapeHtml(row.status || 'Nuevo')+'</span></td>' +
+        '<td><button class="btn danger" type="button" onclick="CRMApp.deleteLead(\''+row.id+'\')">Eliminar</button></td>' +
+      '</tr>';
+    }).join("");
+  }
+
+  function renderContacted(){
+    var data = contacted().filter(function(row){return !isDoctoraliaRow(row);});
+    if(!data.length){
+      $("contactedBody").innerHTML = '<tr><td colspan="12"><div class="empty">Todavía no hay leads contactados. Al pulsar WhatsApp, Llamar o Mail se duplicarán aquí con fecha y hora de contacto.</div></td></tr>';
+      return;
+    }
+    $("contactedBody").innerHTML = data.map(function(row){
+      return '<tr>' +
+        '<td><span class="lead-name">'+escapeHtml(row.name)+'</span><div class="mini">'+escapeHtml(row.company)+'</div></td>' +
+        '<td>'+escapeHtml(row.phone || "-")+'</td>' +
+        '<td>'+escapeHtml(row.email || "-")+'</td>' +
+        '<td><span class="badge">'+escapeHtml(row.channel)+'</span><div class="mini">'+escapeHtml(row.campaign || "")+'</div></td>' +
+        '<td>'+escapeHtml(row.entryAt)+'</td>' +
+        '<td><span class="badge '+escapeHtml(row.contactMethod)+'">'+escapeHtml(labelMethod(row.contactMethod))+'</span></td>' +
+        '<td>'+escapeHtml(row.contactAt)+'</td>' +
+        '<td>'+escapeHtml(row.owner)+'</td>' +
+        '<td>'+Number(row.value||0).toLocaleString("es-ES")+' €</td>' +
+        '<td>'+escapeHtml(row.sourceDetail || "-")+'</td>' +
+        '<td class="notes"><textarea id="'+noteElementId(row.crmContactId)+'" placeholder="Notas del contacto..." oninput="CRMApp.saveNote(\''+row.crmContactId+'\', this.value)">'+escapeHtml(row.notes || "")+'</textarea></td>' +
+        '<td><span class="badge '+statusBadgeClass(row.status || 'Contactado')+'">'+escapeHtml(row.status || 'Contactado')+'</span></td>' +
+      '</tr>';
+    }).join("");
+
+    data.forEach(function(row){
+      if(row.doctoraliaBookingId){
+        loadDoctoraliaNoteForContact(row);
+      }
+    });
+  }
+
+  function renderStats(){
+    var l = leads().filter(function(row){return !isDoctoraliaRow(row);});
+    var c = contacted().filter(function(row){return !isDoctoraliaRow(row);});
+    $("statNew").textContent = l.length;
+    $("statContacted").textContent = c.length;
+    $("statTotal").textContent = l.length + c.length;
+    var today = new Date().toLocaleDateString("es-ES");
+    var todayCount = c.filter(function(x){return String(x.contactAt || "").startsWith(today.slice(0,5));}).length;
+    $("statToday").textContent = todayCount;
+  }
+
+
+
+  /* Doctoralia / Docplanner: capa de carga real desde backend propio. */
+  var DOCTORALIA_BACKEND_URL = window.DOCTORALIA_BACKEND_URL || "http://localhost:3001";
+
+  async function apiGet(path){
+    var response = await fetch(DOCTORALIA_BACKEND_URL + path);
+
+    if(!response.ok){
+      throw new Error("Error API: " + response.status);
+    }
+
+    return response.json();
+  }
+
+  async function apiJson(path, method, payload){
+    var response = await fetch(DOCTORALIA_BACKEND_URL + path, {
+      method: method || "GET",
+      headers: {"Content-Type":"application/json"},
+      body: payload ? JSON.stringify(payload) : undefined
+    });
+
+    if(!response.ok){
+      throw new Error("Error API: " + response.status);
+    }
+
+    return response.json();
+  }
+
+  function localIsoWithOffset(date){
+    var pad = function(n){return String(Math.floor(Math.abs(n))).padStart(2,"0");};
+    var offset = -date.getTimezoneOffset();
+    var sign = offset >= 0 ? "+" : "-";
+    var hours = pad(offset / 60);
+    var minutes = pad(offset % 60);
+    return date.getFullYear() + "-" + pad(date.getMonth()+1) + "-" + pad(date.getDate()) + "T" +
+      pad(date.getHours()) + ":" + pad(date.getMinutes()) + ":" + pad(date.getSeconds()) + sign + hours + ":" + minutes;
+  }
+
+  function doctoraliaRange(){
+    var startDate = new Date();
+    startDate.setHours(0,0,0,0);
+
+    var endDate = new Date(startDate.getTime());
+    endDate.setDate(endDate.getDate() + 7);
+    endDate.setHours(23,59,59,0);
+
+    return {
+      start: encodeURIComponent(localIsoWithOffset(startDate)),
+      end: encodeURIComponent(localIsoWithOffset(endDate))
+    };
+  }
+
+  function listItems(data){
+    if(Array.isArray(data && data._items)) return data._items;
+    if(Array.isArray(data && data.items)) return data.items;
+    if(Array.isArray(data && data.data)) return data.data;
+    if(Array.isArray(data)) return data;
+    return [];
+  }
+
+  function pickBooking(item){
+    return item.booking || item;
+  }
+
+  function pickPatient(item){
+    return item.patient || (item.booking && item.booking.patient) || (item._embedded && item._embedded.patient) || null;
+  }
+
+  function doctoraliaLeadId(item){
+    var booking = pickBooking(item);
+    var bookingId = booking.id || item.id || booking.booking_id || item.booking_id || String(Date.now());
+    return "doctoralia-" + bookingId;
+  }
+
+  function patientName(patient){
+    if(!patient) return "Paciente Doctoralia";
+    var first = patient.first_name || patient.firstName || patient.name || "";
+    var last = patient.last_name || patient.lastName || patient.surname || "";
+    return String((first + " " + last).trim() || patient.full_name || patient.email || patient.phone || "Paciente Doctoralia");
+  }
+
+  function serviceName(service){
+    return String((service && (service.name || service.title || service.label)) || "-");
+  }
+
+  function mapDoctoraliaBookingToLead(item){
+    var booking = pickBooking(item);
+    var patient = pickPatient(item);
+    var bookingId = booking.id || item.id || booking.booking_id || item.booking_id || "";
+    var service = booking.address_service || item.address_service || (booking._embedded && booking._embedded.address_service) || {};
+    var start = booking.start_at || booking.start || item.start_at || item.start || "";
+    var end = booking.end_at || booking.end || item.end_at || item.end || "";
+    var bookedAt = booking.booked_at || booking.created_at || item.booked_at || item.created_at || start || iso();
+    var price = service.price || booking.price || item.price || 0;
+    var status = booking.status || item.status || item.visit_status || "Nuevo";
+
+    if(isCancelledStatus(status)){
+      status = "Cancelada";
+    }
+
+    return {
+      id: doctoraliaLeadId(item),
+      doctoraliaBookingId: String(bookingId),
+      name: patientName(patient),
+      phone: (patient && (patient.phone || patient.phone_number || patient.mobile)) || "",
+      email: (patient && patient.email) || "",
+      company: "Doctoralia",
+      channel: "Doctoralia",
+      campaign: "Reserva Doctoralia",
+      owner: RESPONSIBLES[0],
+      value: Number(price || 0),
+      entryAt: bookedAt ? new Date(bookedAt).toLocaleString("es-ES",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}) : nowStr(),
+      entryISO: bookedAt || iso(),
+      sourceDetail: "booking_id: " + String(bookingId || "-") + " | servicio: " + serviceName(service) + " | visita: " + String(start || "-") + " | fin: " + String(end || "-") + " | estado: " + String(status || "-"),
+      status: status,
+      doctoraliaService: serviceName(service),
+      doctoraliaVisitStart: start,
+      doctoraliaVisitEnd: end,
+      rawDoctoralia: item
+    };
+  }
+
+  function mergeLeadPreservingLocal(existing, incoming){
+    return Object.assign({}, existing || {}, incoming, {
+      id: existing && existing.id ? existing.id : incoming.id,
+      owner: existing && existing.owner ? existing.owner : incoming.owner,
+      crmContactId: existing && existing.crmContactId ? existing.crmContactId : incoming.crmContactId,
+      contactMethod: existing && existing.contactMethod ? existing.contactMethod : incoming.contactMethod,
+      contactAt: existing && existing.contactAt ? existing.contactAt : incoming.contactAt,
+      contactISO: existing && existing.contactISO ? existing.contactISO : incoming.contactISO,
+      notes: existing && existing.notes ? existing.notes : incoming.notes
+    });
+  }
+
+  function upsertDoctoraliaLeads(items){
+    var current = leads();
+    var contactedCurrent = contacted();
+    var created = 0;
+    var updated = 0;
+    var cancelled = 0;
+
+    items.map(mapDoctoraliaBookingToLead).filter(function(row){
+      return row.doctoraliaBookingId;
+    }).forEach(function(row){
+      var leadIndex = current.findIndex(function(existing){
+        return existing.id === row.id || String(existing.doctoraliaBookingId || "") === String(row.doctoraliaBookingId);
+      });
+
+      if(isCancelledStatus(row.status)){
+        cancelled += 1;
+      }
+
+      if(leadIndex >= 0){
+        current[leadIndex] = mergeLeadPreservingLocal(current[leadIndex], row);
+        updated += 1;
+      }else{
+        current.unshift(row);
+        created += 1;
+      }
+
+      contactedCurrent = contactedCurrent.map(function(existing){
+        if(String(existing.doctoraliaBookingId || "") === String(row.doctoraliaBookingId)){
+          updated += 1;
+          return mergeLeadPreservingLocal(existing, row);
+        }
+        return existing;
+      });
+    });
+
+    setLeads(current);
+    setContacted(contactedCurrent);
+    render();
+
+    return {created:created, updated:updated, cancelled:cancelled};
+  }
+
+  function syncMessage(result, label){
+    if(!result.created && !result.updated){
+      return "Sin cambios de " + label;
+    }
+    return label + " sincronizadas: " + result.created + " nuevas, " + result.updated + " actualizadas" + (result.cancelled ? ", " + result.cancelled + " canceladas" : "");
+  }
+
+  async function getPatientNotes(bookingId){
+    return apiGet("/api/crm/patient-notes?booking_id=" + encodeURIComponent(bookingId));
+  }
+
+  async function createPatientNote(payload){
+    return apiJson("/api/crm/patient-notes", "POST", payload);
+  }
+
+  async function updatePatientNote(noteId, payload){
+    return apiJson("/api/crm/patient-notes/" + encodeURIComponent(noteId), "PUT", payload);
+  }
+
+  async function deletePatientNote(noteId){
+    return apiJson("/api/crm/patient-notes/" + encodeURIComponent(noteId), "DELETE");
+  }
+
+  async function cargarReservasDoctoralia(){
+    try{
+      var range = doctoraliaRange();
+      var data = await apiGet("/api/doctoralia/calendar/bookings?start=" + range.start + "&end=" + range.end);
+      var result = upsertDoctoraliaLeads(listItems(data));
+      console.log("Reservas Doctoralia:", data);
+      toast(syncMessage(result, "Reservas Doctoralia"));
+    }catch(error){
+      console.error(error);
+      toast("Error cargando reservas Doctoralia");
+    }
+  }
+
+  async function cargarPacientesDoctoralia(){
+    try{
+      var range = doctoraliaRange();
+      var data = await apiGet("/api/doctoralia/patients?start=" + range.start + "&end=" + range.end);
+      var items = listItems(data).map(function(row){
+        return {
+          id: row.booking_id,
+          booking_id: row.booking_id,
+          status: row.visit_status,
+          start_at: row.visit_start,
+          end_at: row.visit_end,
+          patient: row.patient,
+          address_service: row.address_service || (row.raw_booking && (row.raw_booking.address_service || (row.raw_booking.booking && row.raw_booking.booking.address_service))) || null,
+          raw_booking: row.raw_booking || row
+        };
+      });
+      var result = upsertDoctoraliaLeads(items);
+      console.log("Pacientes Doctoralia:", data._items || data);
+      toast(syncMessage(result, "Pacientes Doctoralia"));
+    }catch(error){
+      console.error(error);
+      toast("Error cargando pacientes Doctoralia");
+    }
+  }
+
+  function render(){
+    renderLeads();
+    renderContacted();
+    renderStats();
+  }
+
+  window.CRMApp = {
+    createLeadFromForm:createLeadFromForm,
+    demoLead:demoLead,
+    contactLead:contactLead,
+    saveNote:saveNote,
+    deleteLead:deleteLead,
+    resetCRM:resetCRM,
+    render:render,
+    apiGet:apiGet,
+    apiJson:apiJson,
+    getPatientNotes:getPatientNotes,
+    createPatientNote:createPatientNote,
+    updatePatientNote:updatePatientNote,
+    deletePatientNote:deletePatientNote,
+    upsertDoctoraliaLeads:upsertDoctoraliaLeads,
+    cargarReservasDoctoralia:cargarReservasDoctoralia,
+    cargarPacientesDoctoralia:cargarPacientesDoctoralia
+  };
+
+  document.addEventListener("DOMContentLoaded", function(){
+    initSelects();
+    render();
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>Doctoralia · Panel privado</title>
+<style>
+:root{--bg:#f4f6f8;--surface:#fff;--surface2:#f8fafc;--ink:#101828;--muted:#667085;--line:#e4e7ec;--dark:#0f172a;--green:#12a150;--amber:#f59e0b;--red:#d92d20;--blue:#2563eb;--purple:#7c3aed;--shadow:0 18px 52px rgba(15,23,42,.10);--r-xl:28px;--r-lg:22px;--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#f8fafc 0%,#f4f6f8 50%,#eef2f7 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.42}button,input,select,textarea{font:inherit}.app{width:min(1480px,100%);margin:0 auto;padding:calc(18px + var(--safe-top)) 18px calc(42px + var(--safe-bottom))}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:16px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.logo{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:var(--dark);color:white;font-weight:900;box-shadow:var(--shadow)}.eyebrow{margin:0 0 4px;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(20px,3.4vw,34px);line-height:1.05;letter-spacing:-.04em;margin-bottom:0}h2{font-size:clamp(25px,3vw,40px);line-height:1.05;letter-spacing:-.045em;margin-bottom:10px}h3{font-size:18px;letter-spacing:-.02em;margin-bottom:8px}.nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.nav a,.btn{display:inline-flex;justify-content:center;align-items:center;min-height:42px;border-radius:14px;padding:10px 14px;text-decoration:none;border:1px solid var(--line);background:var(--surface);font-weight:900;color:var(--dark);cursor:pointer}.btn.primary,.nav a.primary{background:var(--dark);color:white;border-color:var(--dark)}.hero{border-radius:var(--r-xl);padding:clamp(22px,4vw,38px);background:radial-gradient(circle at top right,rgba(124,58,237,.28),transparent 34%),linear-gradient(135deg,#0f172a,#1f2937);color:white;box-shadow:var(--shadow);display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:center}.hero p{color:#d6dae2;margin-bottom:0}.hero .eyebrow{color:#cbd5e1}.hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.hero-stat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:16px}.hero-stat span{display:block;color:#dbe2ee;font-size:12px}.hero-stat strong{display:block;font-size:clamp(22px,3vw,34px);letter-spacing:-.05em}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:22px 0 15px}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;box-shadow:0 10px 28px rgba(15,23,42,.055)}.span-12{grid-column:span 12}.span-6{grid-column:span 6}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn.ok{background:#ecfdf3;color:#05603a;border-color:#abefc6}.btn.warn{background:#fffaeb;color:#93370d;border-color:#fedf89}.btn.danger{background:#fef3f2;color:#912018;border-color:#fecdca}.table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 28px rgba(15,23,42,.055)}.crm-table{width:100%;border-collapse:collapse;min-width:1120px}.crm-table th,.crm-table td{padding:12px 10px;border-bottom:1px solid var(--line);font-size:13px;text-align:left;vertical-align:top}.crm-table th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#f8fafc}.badge{display:inline-flex;align-items:center;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:900;border:1px solid var(--line);background:var(--surface2);color:var(--muted)}.badge.cancelled{background:#fef3f2;color:#912018;border-color:#fecdca}.badge.confirmed{background:#ecfdf3;color:#05603a;border-color:#abefc6}.badge.pending{background:#fffaeb;color:#93370d;border-color:#fedf89}.badge.new{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}.muted{color:var(--muted)}.mini{font-size:12px;color:var(--muted)}.field{display:grid;gap:6px}.field label{font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}.field input,.field textarea{width:100%;border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:12px;color:var(--ink);outline:none}.field textarea{min-height:88px;resize:vertical}.notes textarea{width:100%;min-height:62px;border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;resize:vertical}.empty{padding:18px;border:1px dashed var(--line);border-radius:18px;color:var(--muted);background:var(--surface2)}.toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-bottom));transform:translateX(-50%);background:var(--dark);color:white;padding:12px 16px;border-radius:999px;z-index:9999;box-shadow:0 12px 36px rgba(15,23,42,.22);font-size:13px;font-weight:900;max-width:calc(100% - 30px);text-align:center}.config{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end}.config input{min-height:42px;border:1px solid var(--line);background:var(--surface2);border-radius:14px;padding:10px 12px}.hidden{display:none!important}@media(max-width:1100px){.hero{grid-template-columns:1fr}.span-6{grid-column:span 12}.config{grid-template-columns:1fr}}@media(max-width:680px){.app{padding-left:14px;padding-right:14px}.topbar{display:block}.brand{margin-bottom:12px}.nav{justify-content:stretch}.nav a,.nav button{flex:1}.hero{border-radius:22px}.hero-stats{grid-template-columns:1fr}.section-head{display:block}.card{padding:16px;border-radius:20px}.actions .btn{width:100%;min-height:46px}.crm-table{min-width:980px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <div class="logo">DR</div>
+    <div><p class="eyebrow">Panel privado</p><h1>Doctoralia / Docplanner</h1></div>
+  </a>
+  <nav class="nav">
+    <a href="index.html">General</a>
+    <a href="crm.html">CRM recepción</a>
+    <button class="btn danger" type="button" onclick="DoctoraliaAdmin.clearLocal()">Limpiar demo</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Zona no visible para recepción</p>
+    <h2>Reservas, pacientes y notas internas Doctoralia</h2>
+    <p>Esta pantalla concentra la información de Doctoralia separada del CRM de recepción. Sin backend activo puedes usar demo visual; con backend activo carga datos reales.</p>
+  </div>
+  <div class="hero-stats">
+    <article class="hero-stat"><span>Reservas</span><strong id="statBookings">0</strong></article>
+    <article class="hero-stat"><span>Pacientes</span><strong id="statPatients">0</strong></article>
+    <article class="hero-stat"><span>Canceladas</span><strong id="statCancelled">0</strong></article>
+    <article class="hero-stat"><span>Notas</span><strong id="statNotes">0</strong></article>
+  </div>
+</section>
+
+<div class="section-head"><div><p class="eyebrow">Conexión</p><h2>Prueba visual o carga real</h2></div></div>
+<section class="grid">
+  <article class="card span-6">
+    <h3>Modo demo</h3>
+    <p class="muted">Para verlo subido al dominio o abriendo el archivo, sin credenciales Doctoralia.</p>
+    <div class="actions"><button class="btn ok" type="button" onclick="DoctoraliaAdmin.loadDemo()">Cargar demo visual</button></div>
+  </article>
+  <article class="card span-6">
+    <h3>Modo real</h3>
+    <div class="config">
+      <div class="field"><label>URL backend</label><input id="backendUrl" value="http://localhost:3001" placeholder="https://api.tudominio.com"></div>
+      <button class="btn primary" type="button" onclick="DoctoraliaAdmin.loadReal()">Cargar datos reales</button>
+    </div>
+    <p class="mini">Para real necesitas backend Node activo y credenciales Doctoralia en `.env`.</p>
+  </article>
+</section>
+
+<div class="section-head"><div><p class="eyebrow">Reservas</p><h2>Calendario / visitas Doctoralia</h2></div></div>
+<section class="table-wrap"><table class="crm-table"><thead><tr><th>Paciente</th><th>Teléfono</th><th>Email</th><th>Servicio</th><th>Fecha visita</th><th>Estado</th><th>Booking ID</th><th>Acciones</th></tr></thead><tbody id="bookingsBody"></tbody></table></section>
+
+<div class="section-head"><div><p class="eyebrow">Notas internas</p><h2>Notas propias del CRM</h2></div></div>
+<section class="table-wrap"><table class="crm-table"><thead><tr><th>Paciente</th><th>Booking ID</th><th>Nota interna</th><th>Método</th><th>Responsable</th><th>Guardado</th></tr></thead><tbody id="notesBody"></tbody></table></section>
+</div>
+
+<script>
+(function(){
+  var STORE_KEY = "doctoralia-admin-demo-v1";
+  var NOTES_KEY = "doctoralia-admin-notes-v1";
+  function $(id){return document.getElementById(id);}
+  function escapeHtml(s){return String(s == null ? "" : s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function toast(t){var old=document.querySelector(".toast");if(old)old.remove();var d=document.createElement("div");d.className="toast";d.textContent=t;document.body.appendChild(d);setTimeout(function(){if(d&&d.parentNode)d.parentNode.removeChild(d);},2200);}
+  function load(key){try{return JSON.parse(localStorage.getItem(key)||"[]");}catch(e){return [];}}
+  function save(key,data){localStorage.setItem(key,JSON.stringify(data));}
+  function isCancelled(status){return /cancel|cancelad|anulad/i.test(String(status||""));}
+  function statusClass(status){var v=String(status||"").toLowerCase();if(/cancel|anulad/.test(v))return "cancelled";if(/confirm|present|pagad/.test(v))return "confirmed";if(/pend|nuevo|book/.test(v))return "pending";return "new";}
+  function listItems(data){if(!data)return []; if(Array.isArray(data))return data; return data._items || data.items || data.data || [];}
+  function pickBooking(item){return item.booking || item.raw_booking || item;}
+  function pickPatient(item){return item.patient || (item.booking && item.booking.patient) || (item.raw_booking && (item.raw_booking.patient || (item.raw_booking.booking && item.raw_booking.booking.patient))) || {};}
+  function pickService(item){var b=pickBooking(item);return item.address_service || b.address_service || (b._embedded && b._embedded.address_service) || {};}
+  function patientName(p){var first=p.first_name||p.firstName||p.name||"";var last=p.last_name||p.lastName||p.surname||"";return String((first+" "+last).trim()||p.full_name||p.email||p.phone||"Paciente Doctoralia");}
+  function serviceName(s){return String((s&&(s.name||s.title||s.label))||"-");}
+  function normalize(item){var b=pickBooking(item), p=pickPatient(item), s=pickService(item);var bid=b.id||item.id||b.booking_id||item.booking_id||"";var start=b.start_at||b.start||item.start_at||item.visit_start||"";var status=b.status||item.status||item.visit_status||"Nueva";return {booking_id:String(bid),patient_name:patientName(p),phone:p.phone||p.phone_number||p.mobile||"",email:p.email||"",service:serviceName(s),start_at:start,status:isCancelled(status)?"Cancelada":status,raw:item};}
+  function demoRows(){return [
+    {booking_id:"demo-1001",patient:{first_name:"Laura",last_name:"Martínez",phone:"+34 600 111 222",email:"laura.demo@mail.com"},address_service:{name:"Primera visita"},start_at:new Date(Date.now()+86400000).toISOString(),status:"booked"},
+    {booking_id:"demo-1002",patient:{first_name:"Carlos",last_name:"Ruiz",phone:"+34 600 333 444",email:"carlos.demo@mail.com"},address_service:{name:"Revisión"},start_at:new Date(Date.now()+172800000).toISOString(),status:"confirmed"},
+    {booking_id:"demo-1003",patient:{first_name:"Marta",last_name:"Santos",phone:"+34 600 555 666",email:"marta.demo@mail.com"},address_service:{name:"Consulta online"},start_at:new Date(Date.now()+259200000).toISOString(),status:"cancelled"}
+  ];}
+  function currentRows(){return load(STORE_KEY).map(normalize);}
+  function currentNotes(){return load(NOTES_KEY);}
+  async function apiGet(base,path){var res=await fetch(base+path);if(!res.ok)throw new Error("HTTP "+res.status);return res.json();}
+  function range(){var start=new Date();var end=new Date();end.setDate(end.getDate()+14);return {start:encodeURIComponent(start.toISOString()),end:encodeURIComponent(end.toISOString())};}
+  function render(){var rows=currentRows();var notes=currentNotes();$("statBookings").textContent=rows.length;$("statPatients").textContent=rows.filter(function(r){return r.patient_name;}).length;$("statCancelled").textContent=rows.filter(function(r){return isCancelled(r.status);}).length;$("statNotes").textContent=notes.filter(function(n){return String(n.note||"").trim();}).length;renderBookings(rows);renderNotes(rows,notes);}
+  function renderBookings(rows){if(!rows.length){$("bookingsBody").innerHTML='<tr><td colspan="8"><div class="empty">No hay reservas cargadas. Usa “Cargar demo visual” o “Cargar datos reales”.</div></td></tr>';return;}$("bookingsBody").innerHTML=rows.map(function(r){return '<tr><td><b>'+escapeHtml(r.patient_name)+'</b></td><td>'+escapeHtml(r.phone||'-')+'</td><td>'+escapeHtml(r.email||'-')+'</td><td>'+escapeHtml(r.service||'-')+'</td><td>'+escapeHtml(r.start_at||'-')+'</td><td><span class="badge '+statusClass(r.status)+'">'+escapeHtml(r.status||'-')+'</span></td><td>'+escapeHtml(r.booking_id||'-')+'</td><td>'+ (isCancelled(r.status)?'<span class="badge cancelled">Cancelada</span>':'<button class="btn" type="button" onclick="DoctoraliaAdmin.focusNote(\''+escapeHtml(r.booking_id)+'\')">Nota</button>') +'</td></tr>';}).join('');}
+  function renderNotes(rows,notes){if(!rows.length){$("notesBody").innerHTML='<tr><td colspan="6"><div class="empty">No hay pacientes cargados.</div></td></tr>';return;}$("notesBody").innerHTML=rows.map(function(r){var note=notes.find(function(n){return String(n.booking_id)===String(r.booking_id);})||{};return '<tr><td><b>'+escapeHtml(r.patient_name)+'</b></td><td>'+escapeHtml(r.booking_id)+'</td><td class="notes"><textarea id="note-'+escapeHtml(r.booking_id)+'" placeholder="Nota interna privada..." oninput="DoctoraliaAdmin.saveNote(\''+escapeHtml(r.booking_id)+'\',this.value)">'+escapeHtml(note.note||'')+'</textarea></td><td>otro</td><td>Admin</td><td><span class="mini">'+escapeHtml(note.updated_at||'-')+'</span></td></tr>';}).join('');}
+  function saveNote(bookingId,value){var notes=currentNotes();var idx=notes.findIndex(function(n){return String(n.booking_id)===String(bookingId);});var row={booking_id:String(bookingId),patient_key:String(bookingId),note:String(value||""),contact_method:"otro",contacted_at:new Date().toISOString(),owner:"Admin",updated_at:new Date().toLocaleString("es-ES")};if(idx>=0)notes[idx]=Object.assign({},notes[idx],row);else notes.unshift(row);save(NOTES_KEY,notes);render();}
+  function focusNote(bookingId){var el=$("note-"+bookingId);if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.focus();}}
+  async function loadReal(){try{var base=$("backendUrl").value.replace(/\/$/,"");var r=range();var data=await apiGet(base,"/api/doctoralia/patients?start="+r.start+"&end="+r.end);var items=listItems(data);save(STORE_KEY,items);toast("Datos reales cargados");render();}catch(e){console.error(e);toast("No se pudo cargar real. Usa demo o revisa backend.");}}
+  function loadDemo(){save(STORE_KEY,demoRows());toast("Demo Doctoralia cargada");render();}
+  function clearLocal(){localStorage.removeItem(STORE_KEY);localStorage.removeItem(NOTES_KEY);render();toast("Panel Doctoralia limpiado");}
+  window.DoctoraliaAdmin={loadDemo:loadDemo,loadReal:loadReal,saveNote:saveNote,focusNote:focusNote,clearLocal:clearLocal};
+  document.addEventListener("DOMContentLoaded",render);
+})();
+</script>
+</body>
+</html>

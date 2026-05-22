@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "express-rate-limit": "latest",
+    "helmet": "latest",
+    "sqlite3": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  }
+}
